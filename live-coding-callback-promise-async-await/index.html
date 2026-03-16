@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Live Coding — Callback → Promise → Async/Await</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #1a1a2e;
+      color: #e0e0e0;
+    }
+
+    h1 {
+      color: #e94560;
+    }
+
+    h2 {
+      color: #0f3460;
+      background: #e94560;
+      padding: 8px 16px;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      margin: 5px;
+    }
+
+    .btn-callback {
+      background: #e94560;
+    }
+
+    .btn-promise {
+      background: #0f3460;
+    }
+
+    .btn-async {
+      background: #16813d;
+    }
+
+    .btn-parallel {
+      background: #9b59b6;
+    }
+
+    #output {
+      background: #16213e;
+      border: 1px solid #0f3460;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      min-height: 200px;
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .step {
+      color: #00d2ff;
+    }
+
+    .data {
+      color: #7ec8e3;
+    }
+
+    .error {
+      color: #e94560;
+    }
+
+    .done {
+      color: #4ecca3;
+      font-weight: bold;
+    }
+
+    .time {
+      color: #f5a623;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🔄 Da Callback Hell ad Async/Await</h1>
+  <p>Scenario: caricare <strong>Utente → Post → Commenti</strong> in sequenza</p>
+
+  <button class="btn-callback"
+          onclick="versioneCallback()">1. Callback</button>
+  <button class="btn-promise"
+          onclick="versionePromise()">2. Promise .then()</button>
+  <button class="btn-async"
+          onclick="versioneAsync()">3. Async/Await</button>
+  <button class="btn-parallel"
+          onclick="versioneParallelo()">4. Bonus: Parallelo</button>
+
+  <div id="output">Clicca un bottone per iniziare...</div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
