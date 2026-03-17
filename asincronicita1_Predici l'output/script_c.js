@@ -65,35 +65,37 @@ console.log("4");
 Il () => è solo il modo JavaScript per dire "una funzione anonima che fa..." — la freccia => significa semplicemente "che fa" o "che ritorna".
 */
 
-console.log("1");
-setTimeout(() => console.log("2"), 1000);
-console.log("3");
-setTimeout(() => console.log("4"), 0);
-console.log("5");
+async function primo() {
+    console.log("1");           // [3] eseguito subito quando primo() viene chiamata
+    await Promise.resolve();    // [4] PAUSA: sospende primo(), mette "2" in coda microtask, restituisce il controllo
+    console.log("2");           // [6] riprende dopo che il call stack è vuoto
+}
 
+console.log("3");   // [1] sincrono, eseguito per primo
+primo();            // [2] chiama primo() — solo ora si entra nella funzione
+console.log("4");   // [5] sincrono, eseguito mentre primo() è in pausa
 
 /*
-...quindi il concetto in poche parole è stampa prima in ordine a cascata gli sincroni e poi gkìlia asincroni 0 millesecondi di ritardo è ilo primo e 1000 millesecondi di ritardo è l'ultimo stampato... è giusto il mio ragionamento?
-Sì, il ragionamento è giusto! Puoi vederlo come due "code" separate:
+
+Riga per riga:
 
 
-1. Prima svuota tutto il codice sincrono (nell'ordine in cui appare)
-2. Poi esegui gli asincroni, ordinati per tempo di scadenza
-Regola pratica
-Tipo	Quando viene eseguito
-Sincrono	Subito, nell'ordine in cui appare
-setTimeout(..., 0)	Dopo tutto il sincrono
-setTimeout(..., 500)	Dopo 500ms dal momento della registrazione
-setTimeout(..., 1000)	Dopo 1000ms dal momento della registrazione
-Un'unica precisazione
-Il delay di setTimeout non è "ritardo rispetto al precedente", ma ritardo dall'inizio del programma:
+console.log("3");   // sincrono → stampa 3 subito
+
+primo();            // chiama la funzione async
+Dentro primo():
 
 
-setTimeout(() => console.log("A"), 1000);  // scade a t=1000ms
-setTimeout(() => console.log("B"), 1000);  // scade a t=1000ms → stesso momento!
-setTimeout(() => console.log("C"), 500);   // scade a t=500ms → stampa PRIMA di A e B
-Risultato: C → A → B (A e B stesso delay, vince chi è registrato prima)
+console.log("1");       // sincrono → stampa 1 subito
+await Promise.resolve(); // PAUSA — mette il resto in coda microtask, restituisce il controllo
+await è esattamente come .then() — tutto il codice dopo await viene sospeso e messo nella coda microtask. La funzione "esce" e restituisce il controllo al chiamante.
 
-Quindi il tuo ragionamento è corretto come regola generale.
+
+console.log("4");   // sincrono → stampa 4 subito (primo() è in pausa)
+Ora il call stack è vuoto → il browser svuota i microtask:
+
+
+console.log("2");   // microtask → stampa 2 (il resto di primo() riprende)
+Regola chiave: await non blocca tutto il programma, blocca solo la funzione async. Il codice fuori dalla funzione continua normalmente, e il resto della funzione riprende dopo, come un .then().
 
 */

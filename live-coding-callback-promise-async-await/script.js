@@ -34,7 +34,7 @@ function versioneCallback() {
   output.innerHTML = '<span class="step">⏳ [CALLBACK] Inizio caricamento...</span>\n';
 
   // STEP 1: Carica l'utente
-  fetchConCallback(BASE + "/users/1", function (errUtente, utente) {
+  fetchConCallback(BASE + "/users/01", function (errUtente, utente) {
     if (errUtente) {
       output.innerHTML += '<span class="error">❌ Errore utente: ' + errUtente.message + '</span>\n';
       return;

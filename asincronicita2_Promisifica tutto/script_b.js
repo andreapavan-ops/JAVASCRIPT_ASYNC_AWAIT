@@ -70,32 +70,13 @@ function caricaDatabase(tabella, callback) {
 Il () => è solo il modo JavaScript per dire "una funzione anonima che fa..." — la freccia => significa semplicemente "che fa" o "che ritorna".
 */
 
-// Callback version
-
-function aspetta(ms, callback) {
-    setTimeout(callback, ms);
-}
-aspetta(2000, () => console.log("Fatto!"));
-
-// → Riscrivi come Promise, poi usa con await:
-// Promise version
-function aspettaPromise(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function test() {
-    await aspettaPromise(2000);
-    console.log("Fatto!");
-}
-
-test();
-
-
 /*Funzione B: numero casuale con possibile errore**
 - `return new Promise((resolve, reject) => { ... })` — chiama `resolve(valore)` al successo e `reject(new Error(...))` al fallimento
 - Per testarle con async/await: scrivi una funzione `async function test()` e usa `try/catch`
 */
+
 // Callback version (error-first)
+
 function generaCasuale(min, max, callback) {
     setTimeout(() => {
         if (min >= max) {
