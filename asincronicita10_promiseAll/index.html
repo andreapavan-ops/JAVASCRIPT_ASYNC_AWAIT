@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Servizi</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1a2e; color: #eee; }
+        h1 { margin-bottom: 20px; }
+
+        .controlli { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .controlli button {
+            padding: 10px 18px; border: none; border-radius: 8px;
+            font-size: 14px; cursor: pointer; font-weight: bold;
+        }
+        #btnControlla { background: #27ae60; color: white; }
+        #btnAutoRefresh { background: #2980b9; color: white; }
+        #btnAutoRefresh.attivo { background: #e74c3c; }
+
+        .riepilogo {
+            background: #16213e; padding: 14px 20px; border-radius: 10px;
+            margin-bottom: 20px; font-size: 18px;
+        }
+
+        .griglia {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+        .servizio-card {
+            background: #16213e; border-radius: 10px; padding: 16px;
+            border-left: 4px solid #555;
+        }
+        .servizio-card.ok { border-left-color: #27ae60; }
+        .servizio-card.errore { border-left-color: #e74c3c; }
+        .servizio-card.lento { border-left-color: #f39c12; }
+        .servizio-card.verifica { border-left-color: #3498db; }
+
+        .servizio-card .nome { font-weight: bold; font-size: 16px; margin-bottom: 6px; }
+        .servizio-card .stato { font-size: 14px; }
+        .servizio-card .tempo { font-size: 12px; color: #aaa; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🖥️ Status Servizi</h1>
+
+    <div class="controlli">
+        <button id="btnControlla">🔍 Controlla tutti</button>
+        <button id="btnAutoRefresh">🔄 Auto-refresh OFF</button>
+    </div>
+
+    <div class="riepilogo" id="riepilogo">Clicca "Controlla tutti" per iniziare</div>
+    <div class="griglia" id="griglia"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricerca Utenti</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        h1 { margin-bottom: 20px; }
+
+        .ricerca {
+            display: flex; gap: 10px; margin-bottom: 15px;
+            flex-wrap: wrap; align-items: center;
+        }
+        .ricerca input {
+            padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+            font-size: 16px; flex: 1; min-width: 200px;
+        }
+        .ricerca input:focus { outline: none; border-color: #3498db; }
+        .ricerca select {
+            padding: 10px; border: 2px solid #ddd; border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .contatore { margin-bottom: 15px; color: #666; font-style: italic; }
+
+        .griglia {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .card {
+            background: white; border-radius: 10px; padding: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        .card h3 { color: #2c3e50; margin-bottom: 6px; }
+        .card p { font-size: 14px; color: #555; margin: 3px 0; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Ricerca Utenti</h1>
+
+    <div class="ricerca">
+        <input type="text" id="searchInput" placeholder="Cerca utenti...">
+        <select id="campoSelect">
+            <option value="tutti">Tutti i campi</option>
+            <option value="name">Nome</option>
+            <option value="email">Email</option>
+            <option value="city">Città</option>
+            <option value="company">Azienda</option>
+        </select>
+    </div>
+
+    <div class="contatore" id="contatore">Caricamento utenti...</div>
+    <div class="griglia" id="risultati"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
